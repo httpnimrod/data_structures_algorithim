@@ -2,9 +2,10 @@
 NIMROD MUMO MUTISYA
 SCT212-0709/2022
 DSA
+
+
 Task One (1):
 Functions:
-
 summation: Calculates the sum of integers in an array.
 maximum: Finds the largest integer in the array.
 Steps:
