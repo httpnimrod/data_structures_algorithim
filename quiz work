@@ -1,16 +1,22 @@
-QUESTION ONE
+//QUESTION ONE
 #include <stdio.h>
 
 int removeDuplicates(int* nums, int numsSize) {
     if (numsSize == 0) return 0;
     
+    int* unique_nums = nums; // Maintain a separate array for unique elements
     int unique_count = 1; // Initialize with the first element being unique
     
     for (int i = 1; i < numsSize; i++) {
         if (nums[i] != nums[i - 1]) {
-            nums[unique_count] = nums[i]; // Update the array with unique elements
+            unique_nums[unique_count] = nums[i]; // Update the separate array with unique elements
             unique_count++;
         }
+    }
+    
+    // Copy back unique elements to the original array if needed
+    for (int i = 0; i < unique_count; i++) {
+        nums[i] = unique_nums[i];
     }
     
     return unique_count;
@@ -31,14 +37,18 @@ int main() {
     
     return 0;
 }
-Question Two (Rotate Array)
 
+
+//Question Two (Rotate Array)
 #include <stdio.h>
 
 void rotate(int* nums, int numsSize, int k) {
     if (numsSize <= 1) return;
     
-    k %= numsSize; // Adjust k if it's greater than numsSize
+    k = k % numsSize; // Adjust k to be within the range [0, numsSize)
+    if (k < 0) {
+        k += numsSize; // Adjust negative rotation count
+    }
     
     // Reverse the whole array
     for (int i = 0, j = numsSize - 1; i < j; i++, j--) {
@@ -77,7 +87,8 @@ int main() {
     
     return 0;
 }
-Question Three (Contains Duplicate)
+
+//Question Three (Contains Duplicate)
 
 #include <stdio.h>
 
@@ -93,7 +104,7 @@ typedef struct {
 } HashSet;
 
 int hash(int key) {
-    return (key % HASH_SIZE + HASH_SIZE) % HASH_SIZE;
+    return (unsigned int)key % HASH_SIZE; // Ensure non-negative hash value
 }
 
 void add(HashSet* set, int key) {
@@ -138,7 +149,8 @@ int main() {
     
     return 0;
 }
-Question Four (Single Number)
+
+//Question Four (Single Number)
 
 #include <stdio.h>
 
@@ -159,4 +171,5 @@ int main() {
     printf("Single number: %d\n", single);
     
     return 0;
-  }
+}
+
