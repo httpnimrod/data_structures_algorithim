@@ -1,4 +1,7 @@
 # data_structures_algorithim
+NIMROD MUMO MUTISYA
+SCT212-0709/2022
+DSA
 Task One (1):
 Functions:
 
