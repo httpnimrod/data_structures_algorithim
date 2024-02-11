@@ -1,18 +1,19 @@
-TASK ONE
+//TASK ONE
 #include <iostream>
+#include <vector>
 #include <limits>
 
-int summation(int arr[], int n) {
+int summation(const std::vector<int>& arr) {
     int sum = 0;
-    for (int i = 0; i < n; ++i) {
-        sum += arr[i];
+    for (int num : arr) {
+        sum += num;
     }
     return sum;
 }
 
-int maximum(int arr[], int n) {
+int maximum(const std::vector<int>& arr) {
     int max = arr[0];
-    for (int i = 1; i < n; ++i) {
+    for (int i = 1; i < arr.size(); ++i) {
         if (arr[i] > max) {
             max = arr[i];
         }
@@ -30,22 +31,24 @@ int main() {
         return 1;
     }
 
-    int arr[n];
+    std::vector<int> arr(n);
     std::cout << "Enter " << n << " integers:\n";
     for (int i = 0; i < n; ++i) {
         std::cin >> arr[i];
     }
 
-    std::cout << "Sum of the integers: " << summation(arr, n) << std::endl;
-    std::cout << "Maximum integer: " << maximum(arr, n) << std::endl;
+    std::cout << "Sum of the integers: " << summation(arr) << std::endl;
+    std::cout << "Maximum integer: " << maximum(arr) << std::endl;
 
     return 0;
 }
-Task Two (2) and Task Three (3):
-cpp
-Copy code
+
+
+//Task 2 and 3
+
 #include <iostream>
 #include <string>
+#include <vector>
 
 // Define Course struct
 struct Course {
@@ -65,21 +68,24 @@ struct Student {
     std::string name;
     int age;
     Course course;
-    Grade grades;
+    std::vector<Grade> grades; // Store multiple grades
 
     // Function to add marks and calculate grades
     void addMarks(int mark) {
-        grades.mark = mark;
+        Grade newGrade;
+        newGrade.mark = mark;
         if (mark > 69)
-            grades.grade = 'A';
+            newGrade.grade = 'A';
         else if (mark > 59)
-            grades.grade = 'B';
+            newGrade.grade = 'B';
         else if (mark > 49)
-            grades.grade = 'C';
+            newGrade.grade = 'C';
         else if (mark > 39)
-            grades.grade = 'D';
+            newGrade.grade = 'D';
         else
-            grades.grade = 'E';
+            newGrade.grade = 'E';
+
+        grades.push_back(newGrade); // Add new grade to vector
     }
 };
 
@@ -100,7 +106,12 @@ int main() {
     std::cout << "Age: " << student.age << std::endl;
     std::cout << "Course Code: " << student.course.courseCode << std::endl;
     std::cout << "Course Name: " << student.course.courseName << std::endl;
-    std::cout << "Grade: " << student.grades.grade << std::endl;
+
+    // Display all grades
+    std::cout << "Grades:\n";
+    for (const Grade& grade : student.grades) {
+        std::cout << "Mark: " << grade.mark << ", Grade: " << grade.grade << std::endl;
+    }
 
     return 0;
 }
